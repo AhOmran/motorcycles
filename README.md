@@ -22,9 +22,14 @@ npm installl
 ```sh
 npm run dev
 ```
+- Copy .env.example file to .env, and set your env values.
 - To migrate database, use php artisan migrate. To seed database use "--seed" option.
 ```sh
 php artisan migrate --seed
+```
+- To link storage, use this command.
+```sh
+php artisan storage:link
 ```
 - To queue worker, use php artisan queue:work.
 ```sh
