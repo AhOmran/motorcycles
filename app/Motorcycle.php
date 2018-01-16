@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Events\MotorcycleSaved;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -18,5 +19,14 @@ class Motorcycle extends Model implements HasMediaConversions
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->crop(Manipulations::CROP_CENTER, 400, 400);
+    }
+
+    public static function boot()
+    {
+        static::saved(function ($model) {
+            event(new MotorcycleSaved($model));
+        });
+
+        parent::boot();
     }
 }
