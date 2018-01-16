@@ -18,6 +18,10 @@
                 </h2>
                 <p class="description">{{ str_limit($motorcycle->description, 100) }}</p>
                 <p class="phone-number">Call seller at: {{ $motorcycle->phone_number }}</p>
+
+                @if($motorcycle->sold)
+                    <span class="label label-primary">Sold</span>
+                @endif
             </div>
             <div class="col-md-5">
                 <div class="images">

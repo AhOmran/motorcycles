@@ -7,6 +7,11 @@ use Spatie\MediaLibrary\Media;
 
 class MotorcyclesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         $motorcycles = Motorcycle::with('media')->latest()->where('sold', 0)->paginate(20);
@@ -44,8 +49,6 @@ class MotorcyclesController extends Controller
                 $this->addImages($request, $motorcycle);
             });
         } catch (\Exception $exception) {
-            dd($exception);
-
             flash('Request failed, try again later.')->error();
 
             return redirect()->route('home');
@@ -56,19 +59,21 @@ class MotorcyclesController extends Controller
         return redirect()->route('home');
     }
 
-    public function edit($id)
+    public function edit(Motorcycle $motorcycle)
     {
-        return view('motorcycles.edit', ['motorcycle' => Motorcycle::findOrFail($id)]);
+        $this->authorize('update', $motorcycle);
+
+        return view('motorcycles.edit', compact('motorcycle'));
     }
 
-    public function update($id, Request $request)
+    public function update(Motorcycle $motorcycle, Request $request)
     {
+        $this->authorize('update', $motorcycle);
+
         try {
             $this->deleteImages($request);
 
             $input = $this->getInput($request);
-
-            $motorcycle = Motorcycle::findOrFail($id);
 
             \DB::transaction(function () use ($motorcycle, $request, $input) {
                 $motorcycle->fill($input)->save();
@@ -86,22 +91,15 @@ class MotorcyclesController extends Controller
         return redirect()->route('home');
     }
 
-    public function destroy($id)
+    public function destroy(Motorcycle $motorcycle)
     {
-        $motorcycle = Motorcycle::findOrFail($id);
+        $this->authorize('destroy', $motorcycle);
 
         $motorcycle->delete();
 
         flash('Record has been deleted successfully.')->success();
 
         return redirect()->back();
-    }
-
-    public function toggleStatus(Motorcycle $motorcycle)
-    {
-        $motorcycle->fill(['sold' => !$motorcycle->sold])->save();
-
-        return response()->json(['toggled' => true]);
     }
 
     public function getInput(Request $request)
