@@ -34,6 +34,16 @@ class Motorcycle extends Model implements HasMediaConversions
     }
 
     /**
+     * User owns this motorcycle.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Motorcycle boot.
      */
     public static function boot()
