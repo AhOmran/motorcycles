@@ -3,6 +3,13 @@ require('./bootstrap');
 var $body = $('body');
 
 $('#formLogin').validate();
+$('#formRegister').validate({
+    rules: {
+        password_confirmation: {
+            equalTo: "#password"
+        }
+    }
+});
 
 $body.on('click', '.btn-select', function () {
     $(this).parents('.file-input').find('input[type=file]').click();

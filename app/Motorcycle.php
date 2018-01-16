@@ -18,7 +18,9 @@ class Motorcycle extends Model implements HasMediaConversions
 
     public function registerMediaConversions(Media $media = null)
     {
-        $this->addMediaConversion('thumb')->crop(Manipulations::CROP_CENTER, 400, 400);
+        $this->addMediaConversion('thumb')
+            ->crop(Manipulations::CROP_CENTER, 400, 400)
+            ->nonQueued();
     }
 
     public static function boot()

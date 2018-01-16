@@ -19,9 +19,13 @@ class MotorcyclesController extends Controller
         return view('motorcycles.index', compact('motorcycles'));
     }
 
-    public function show(Motorcycle $motorcycle)
+    public function show($id)
     {
-        return view('motorcycles.show', compact('motorcycle'));
+        if (\Cache::has('views-motorcycles-show-' . $id)) {
+            return \Cache::get('views-motorcycles-show-' . $id);
+        }
+
+        return view('motorcycles.show', ['motorcycle' => Motorcycle::findOrFail($id)]);
     }
 
     public function mine()

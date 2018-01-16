@@ -20,6 +20,6 @@ class UpdateMotorcycleViewsCache implements ShouldQueue
     public function cacheShowView(MotorcycleSaved $event)
     {
         $showView = view('motorcycles.show', ['motorcycle' => $event->motorcycle->id])->render();
-        \Cache::forever('views-show-' . $event->motorcycle->id, $showView);
+        \Cache::forever('views-motorcycles-show-' . $event->motorcycle->id, $showView);
     }
 }
