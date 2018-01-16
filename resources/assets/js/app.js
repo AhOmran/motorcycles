@@ -10,8 +10,10 @@ $('#formRegister').validate({
         }
     }
 });
+$('#formMotorcycle').validate();
 
-$body.on('click', '.btn-select', function () {
+$body.on('click', '.btn-select', function (e) {
+    e.preventDefault();
     $(this).parents('.file-input').find('input[type=file]').click();
 });
 
@@ -21,11 +23,14 @@ $body.on('change', '.file-input input[type=file]', function () {
     return this.files[0] ? $filename.val(this.files[0].name) : $filename.val('');
 });
 
-$body.on('click', '.file-input .btn-delete', function () {
+$body.on('click', '.file-input .btn-delete', function (e) {
+    e.preventDefault();
     $(this).parents('.file-input').remove();
 });
 
-$('.images .btn-add').on('click', function () {
+$('.images .btn-add').on('click', function (e) {
+    e.preventDefault();
+
     $('.images .inputs').append(
         Handlebars.compile($('#fileInputTemplate').html())
     );
