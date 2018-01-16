@@ -17,7 +17,10 @@
                     <a href="{{ route('motorcycles.show', $motorcycle->id) }}">{{ $motorcycle->title }}</a>
                 </h2>
                 <p class="description">{{ str_limit($motorcycle->description, 100) }}</p>
-                <p class="phone-number">Call seller at: {{ $motorcycle->phone_number }}</p>
+
+                @if($motorcycle->user)
+                    <p class="seller">{{ $motorcycle->user->name }} | {{ $motorcycle->user->phone_number }}</p>
+                @endif
 
                 @if($motorcycle->sold)
                     <span class="label label-primary">Sold</span>

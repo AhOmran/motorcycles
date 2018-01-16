@@ -9,9 +9,9 @@
 
                     <p class="description">{{ $motorcycle->description }}</p>
 
-                    <p class="phone-number">
-                        <strong>Call seller at: {{ $motorcycle->phone_number }}</strong>
-                    </p>
+                    @if($motorcycle->user)
+                        <p class="seller">{{ $motorcycle->user->name }} | {{ $motorcycle->user->phone_number }}</p>
+                    @endif
 
                     <hr>
 
