@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MotorcycleRequest;
 use App\Motorcycle;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Media;
@@ -67,10 +68,10 @@ class MotorcyclesController extends Controller
     /**
      * Persist new motorcycle into database.
      *
-     * @param Request $request
+     * @param MotorcycleRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(MotorcycleRequest $request)
     {
         try {
             $input = $this->getInput($request);
@@ -110,10 +111,10 @@ class MotorcyclesController extends Controller
      * Update motorcycle.
      *
      * @param Motorcycle $motorcycle
-     * @param Request $request
+     * @param MotorcycleRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Motorcycle $motorcycle, Request $request)
+    public function update(Motorcycle $motorcycle, MotorcycleRequest $request)
     {
         $this->authorize('update', $motorcycle);
 
