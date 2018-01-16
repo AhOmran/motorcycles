@@ -5,6 +5,8 @@
     <div id="app">
         @include('layouts.partials._navbar')
 
+        @include('flash::message')
+
         @yield('content')
     </div>
 

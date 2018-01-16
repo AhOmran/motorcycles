@@ -40,7 +40,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('motorcycles.index', ['mine']) }}">My Motorcycles</a></li>
+                            <li><a href="{{ route('motorcycles.mine') }}">My Motorcycles</a></li>
                             <li><a href="{{ route('motorcycles.create') }}">Add New Motorcycle</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"

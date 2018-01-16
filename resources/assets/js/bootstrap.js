@@ -24,3 +24,6 @@ try {
     });
 } catch (e) {
 }
+
+window.Handlebars = require('handlebars/dist/handlebars.js');
+require('lightbox2');

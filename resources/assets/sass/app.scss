@@ -1,9 +1,152 @@
-
-// Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-// Variables
 @import "variables";
-
-// Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~font-awesome/scss/font-awesome";
+@import "~lightbox2/dist/css/lightbox";
+
+a {
+    color: #636b6f;
+}
+
+.section-title {
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 1.6em;
+    padding-bottom: 10px;
+}
+
+.img-widget {
+    width: 100px;
+    padding: 2px;
+    border: 1px solid #eeeeee;
+    display: inline-block;
+    margin-bottom: 5px;
+
+    &.img-widget-sm {
+        width: 100px;
+    }
+
+    &.img-widget-md {
+        width: 200px;
+    }
+
+    img {
+        width: 100%;
+    }
+}
+
+#motorcycle {
+    .description {
+        margin-bottom: 20px;
+    }
+}
+
+#formMotorcycle {
+    .file-input {
+        margin-bottom: 5px;
+
+        .filename {
+            background-color: #fff;
+        }
+
+        input[type=file] {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .btn-delete {
+            border-radius: 0;
+        }
+    }
+
+    .existing {
+        padding: 20px 0;
+        text-align: center;
+
+        .thumb {
+            display: inline-block;
+            width: 100px;
+            padding: 2px;
+            border: 1px solid #eeeeee;
+            background-color: #fff;
+            transition: ease all .4s;
+            position: relative;
+            margin-bottom: 5px;
+
+            img {
+                width: 100%;
+            }
+
+            .btn-delete {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                display: none;
+            }
+
+            &:hover {
+                text-decoration: none;
+                border-color: #a3a3a3;
+
+                button {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+.card {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #eeeeee;
+    padding: 15px;
+    position: relative;
+
+    .buttons {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        .btn {
+            border-radius: 0;
+            float: left;
+        }
+    }
+
+    .title {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+    }
+
+    .description {
+        font-size: 1.1em;
+        margin: 0 0 20px 0;
+    }
+
+    .phone-number {
+        font-weight: bold;
+    }
+
+    .images {
+        padding-top: 20px;
+        text-align: center;
+
+        a {
+            width: 100px;
+            padding: 2px;
+            border: 1px solid #eeeeee;
+            display: inline-block;
+            margin-bottom: 5px;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
