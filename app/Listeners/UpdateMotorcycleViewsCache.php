@@ -17,6 +17,11 @@ class UpdateMotorcycleViewsCache implements ShouldQueue
         $this->cacheShowView($event);
     }
 
+    /**
+     * Update show view on cache.
+     *
+     * @param MotorcycleSaved $event
+     */
     public function cacheShowView(MotorcycleSaved $event)
     {
         $showView = view('motorcycles.show', ['motorcycle' => $event->motorcycle->id])->render();

@@ -7,11 +7,19 @@ use Spatie\MediaLibrary\Media;
 
 class MotorcyclesController extends Controller
 {
+    /**
+     * MotorcyclesController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
+    /**
+     * List all motorcycles
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $motorcycles = Motorcycle::with('media')->latest()->where('sold', 0)->paginate(20);
@@ -19,6 +27,12 @@ class MotorcyclesController extends Controller
         return view('motorcycles.index', compact('motorcycles'));
     }
 
+    /**
+     * Show motorcycle.
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         if (\Cache::has('views-motorcycles-show-' . $id)) {
@@ -28,6 +42,11 @@ class MotorcyclesController extends Controller
         return view('motorcycles.show', ['motorcycle' => Motorcycle::findOrFail($id)]);
     }
 
+    /**
+     * List current user motorcycles.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function mine()
     {
         $motorcycles = Motorcycle::with('media')->where('user_id', auth()->id())->latest()->paginate(20);
@@ -35,11 +54,22 @@ class MotorcyclesController extends Controller
         return view('motorcycles.mine', compact('motorcycles'));
     }
 
+    /**
+     * Show form to create a new motorcycle.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('motorcycles.create', ['motorcycle' => new Motorcycle]);
     }
 
+    /**
+     * Persist new motorcycle into database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         try {
@@ -63,6 +93,12 @@ class MotorcyclesController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Show form to edit motorcycle.
+     *
+     * @param Motorcycle $motorcycle
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Motorcycle $motorcycle)
     {
         $this->authorize('update', $motorcycle);
@@ -70,6 +106,13 @@ class MotorcyclesController extends Controller
         return view('motorcycles.edit', compact('motorcycle'));
     }
 
+    /**
+     * Update motorcycle.
+     *
+     * @param Motorcycle $motorcycle
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Motorcycle $motorcycle, Request $request)
     {
         $this->authorize('update', $motorcycle);
@@ -95,6 +138,12 @@ class MotorcyclesController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Delete motorcycle from database.
+     *
+     * @param Motorcycle $motorcycle
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Motorcycle $motorcycle)
     {
         $this->authorize('destroy', $motorcycle);
@@ -106,6 +155,12 @@ class MotorcyclesController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Get array of all valid inputs.
+     *
+     * @param Request $request
+     * @return array
+     */
     public function getInput(Request $request)
     {
         $input = $request->only('title', 'description', 'phone_number');
@@ -115,6 +170,13 @@ class MotorcyclesController extends Controller
         return $input;
     }
 
+    /**
+     * Store motorcycle images.
+     *
+     * @param Request $request
+     * @param Motorcycle $motorcycle
+     * @return bool
+     */
     public function addImages(Request $request, Motorcycle $motorcycle)
     {
         $uploadedImages = $request->file('images');
@@ -130,6 +192,12 @@ class MotorcyclesController extends Controller
         return true;
     }
 
+    /**
+     * Delete images.
+     *
+     * @param Request $request
+     * @return bool
+     */
     public function deleteImages(Request $request)
     {
         $deletedImageIds = $request->get('deleted_image_ids');

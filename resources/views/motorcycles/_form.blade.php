@@ -48,9 +48,9 @@
     <div class="col-md-4 col-md-offset-1">
         <div class="images">
             <div class="pull-right">
-                <a href="#" class="btn btn-default btn-sm btn-add">
+                <button type="button" class="btn btn-default btn-sm btn-add">
                     <i class="fa fa-plus fa-fw"></i> Add
-                </a>
+                </button>
             </div>
 
             <h2 class="section-title">Images</h2>
@@ -61,10 +61,10 @@
                         <input type="file" name="images[]">
                         <input type="text" class="form-control filename" placeholder="Filename" readonly>
                         <div class="input-group-btn">
-                            <a type="#" class="btn btn-default btn-select">Select</a>
-                            <a type="#" class="btn btn-default btn-delete">
+                            <button type="button" class="btn btn-default btn-select">Select</button>
+                            <button type="button" class="btn btn-default btn-delete">
                                 <i class="fa fa-trash fa-fw"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

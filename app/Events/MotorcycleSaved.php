@@ -11,6 +11,9 @@ class MotorcycleSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    /**
+     * @var Motorcycle
+     */
     public $motorcycle;
 
     /**

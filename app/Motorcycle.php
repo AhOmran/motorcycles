@@ -12,10 +12,20 @@ class Motorcycle extends Model implements HasMediaConversions
 {
     use HasMediaTrait;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title', 'description', 'phone_number', 'sold', 'user_id'
     ];
 
+    /**
+     * Register a new media conversion to generate thumbnail.
+     *
+     * @param Media|null $media
+     */
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')
@@ -23,6 +33,9 @@ class Motorcycle extends Model implements HasMediaConversions
             ->nonQueued();
     }
 
+    /**
+     * Motorcycle boot.
+     */
     public static function boot()
     {
         static::saved(function ($model) {
